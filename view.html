@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>设备信息</title>
+</head>
+<body>
+    <h1 id="deviceName"></h1>
+    <p>PDF文件列表：</p>
+    <ul id="pdfList"></ul>
+
+    <script>
+        function getQueryParam(name) {
+            const params = new URLSearchParams(window.location.search);
+            return params.get(name);
+        }
+
+        document.getElementById('deviceName').textContent = getQueryParam('name') || '未知设备';
+
+        const pdfs = [getQueryParam('pdf1'), getQueryParam('pdf2')].filter(Boolean);
+        const list = document.getElementById('pdfList');
+        pdfs.forEach((url, index) => {
+            const li = document.createElement('li');
+            li.innerHTML = `<a href="${url}" target="_blank">PDF ${index + 1}</a>`;
+            list.appendChild(li);
+        });
+    </script>
+</body>
+</html>
